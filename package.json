@@ -1,0 +1,41 @@
+{
+  "name": "holoplay",
+  "version": "1.0.3",
+  "description": "A library for the Looking Glass 3D display that relies on three.js to show content in true 3D from the browser.",
+  "main": "dist/holoplay.js",
+  "module": "dist/holoplay.module.js",
+  "files": [
+    "dist",
+    "src",
+    "HoloPlay_JS_License.pdf",
+    "rollup.config.js"
+  ],
+  "scripts": {
+    "build": "rollup --config && terser dist/holoplay.js -m --output dist/holoplay.min.js",
+    "dev": "concurrently --names \"ROLLUP,HTTP\" -c \"bgBlue.bold,bgGreen.bold\" \"rollup -c -w -m inline\" \"http-server -c-1 -p 8080\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@ungap/event-target": "^0.1.0",
+    "fullscreen-polyfill": "^1.0.2",
+    "holoplay-core": "0.0.8",
+    "three": "^0.102.1"
+  },
+  "keywords": [
+    "holoplay",
+    "hologram",
+    "looking glass"
+  ],
+  "author": "Looking Glass Factory",
+  "license": "SEE LICENSE IN HoloPlay_JS_License.pdf",
+  "bugs": {
+    "url": "https://github.com/Looking-Glass/HoloPlayJS_Issues/issues"
+  },
+  "homepage": "https://lookingglassfactory.com/devtools/holoplay-js-library",
+  "devDependencies": {
+    "@rollup/plugin-node-resolve": "^7.1.1",
+    "concurrently": "^5.1.0",
+    "rollup": "^2.1.0",
+    "terser": "^4.6.7"
+  }
+}
