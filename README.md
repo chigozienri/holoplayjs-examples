@@ -26,7 +26,7 @@ To view the examples in this repository, you will need to have a Looking Glass l
 - [3D Model 2D+Depth](stereo_jpn_org_lkg/depth3d/depth3de.html) shows how to
 - [Dancing Doll](stereo_jpn_org_lkg/fbx/fbx.html) shows how to load an FBX.
 - [FBX Viewer](stereo_jpn_org_lkg/fbxviewer/fbxviewer.html) shows how to load an FBX.
-- [hwdepth](stereo_jpn_org_lkg/hwdepth/depthe.html) shows how to
+- [Half Width 2D+Depth](stereo_jpn_org_lkg/hwdepth/depthe.html) shows how to
 - [Horizontal Shift movies](stereo_jpn_org_lkg/ido/idoe.html) shows how to
 - [180 Horizontal Shift movies](stereo_jpn_org_lkg/id180/id180e.html) shows how to
 - [Panorama](stereo_jpn_org_lkg/pano/pano.html) shows how to
