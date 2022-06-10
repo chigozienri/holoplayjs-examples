@@ -23,7 +23,7 @@ To view the examples in this repository, you will need to have a Looking Glass l
 - [Calibration](stereo_jpn_org_lkg/carib/index.html) shows how to access the calibration values.
 - [Human's head](stereo_jpn_org_lkg/decals/decals.html) shows how to add a decal with texture and normal map to a model dynamically (Paint splatters are added to a head model where you click on the surface).
 - [2D+Depth](stereo_jpn_org_lkg/depth/depthe.html) shows how to
-- [3D Model 2D+Depth](stereo_jpn_org_lkg/depth3d/depth3d.html) shows how to
+- [3D Model 2D+Depth](stereo_jpn_org_lkg/depth3d/depth3de.html) shows how to
 - [Dancing Doll](stereo_jpn_org_lkg/fbx/fbx.html) shows how to load an FBX.
 - [FBX Viewer](stereo_jpn_org_lkg/fbxviewer/fbxviewer.html) shows how to load an FBX.
 - [hwdepth](stereo_jpn_org_lkg/hwdepth/depthe.html) shows how to
