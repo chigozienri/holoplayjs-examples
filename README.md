@@ -28,7 +28,7 @@ To view the examples in this repository, you will need to have a Looking Glass l
 - [FBX Viewer](stereo_jpn_org_lkg/fbxviewer/fbxviewer.html) shows how to load an FBX.
 - [Half Width 2D+Depth](stereo_jpn_org_lkg/hwdepth/depthe.html) shows how to
 - [Horizontal Shift movies](stereo_jpn_org_lkg/ido/idoe.html) shows how to
-- [180 Horizontal Shift movies](stereo_jpn_org_lkg/id180/id180e.html) shows how to
+- [180 Horizontal Shift movies](stereo_jpn_org_lkg/ido180/ido180e.html) shows how to
 - [Panorama](stereo_jpn_org_lkg/pano/pano.html) shows how to
 - [iPhone](stereo_jpn_org_lkg/portrait/portraite.html) shows how to
 - [Quilt](stereo_jpn_org_lkg/quilt/Quilte.html) shows how to
