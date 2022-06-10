@@ -1,10 +1,14 @@
-This is a collection of examples of the use of Holoplay.js
+# Holoplay.js
+## This is a collection of examples of the use of Holoplay.js
 
-To run the examples in this repository locally, you will need to [https://docs.lookingglassfactory.com/developer-tools/three/localserver](run a local server)
+To run the examples in this repository locally, you will need to [run a local server](https://docs.lookingglassfactory.com/developer-tools/three/localserver)
 
-To view the examples in this repository, you will need to have a Looking Glass light field display, and have installed the [https://docs.lookingglassfactory.com/getting-started/holoplay-service#holoplay-service](Holoplay Service)
+To view the examples in this repository, you will need to have a Looking Glass light field display, and have installed the [Holoplay Service](https://docs.lookingglassfactory.com/getting-started/holoplay-service#holoplay-service)
+
+The example in holoplaycore is from [https://codesandbox.io/s/hardcore-butterfly-l5o9d](https://codesandbox.io/s/hardcore-butterfly-l5o9d)
+- [Test Setup](holoplaycore/index.html) shows how to directly send a quilt to a connected Looking Glass device (without moving a window over)
 
 The examples in lookingglass are from [https://docs.lookingglassfactory.com/developer-tools/three](https://docs.lookingglassfactory.com/developer-tools/three)
 
 The examples in stereo_jpn_org_lkg are from [http://stereo.jpn.org/lkg](http://stereo.jpn.org/lkg)
-- [stereo_jpn_org_lkg/carib/index.html](Carib) shows how to access the calibration values.
+- [Carib](stereo_jpn_org_lkg/carib/index.html) shows how to access the calibration values.
