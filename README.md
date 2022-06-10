@@ -37,7 +37,7 @@ To view the examples in this repository, you will need to have a Looking Glass l
 - [Octaminator](stereo_jpn_org_lkg/tako/assimp.html) shows how to
 - [Little Tokyo](stereo_jpn_org_lkg/tokyo/tokyo.html) shows how to
 - [Kandao](stereo_jpn_org_lkg/sample/360/index.html) shows how to
-- [Flowers](stereo_jpn_org_lkg/flower/flower.html) shows how to
+- [Flowers](stereo_jpn_org_lkg/sample/flower/flower.html) shows how to
 - [Shift Movie misc](stereo_jpn_org_lkg/sample/ido/index.html) shows how to
 - [Planet](stereo_jpn_org_lkg/sample/littlep/index.html) shows how to
 - [Macro Room](stereo_jpn_org_lkg/sample/macro/index.html) shows how to
