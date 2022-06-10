@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<!-- saved from url=(0108)https://s3.amazonaws.com/static-files.lookingglassfactory.com/ThreeJSLibrary/LookingGlassTutorial/index.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+    <title>
+      HoloPlayerTutorial
+    </title>
+    <style>
+      body 
+      { 
+          margin-left: 0px;
+          margin-right: 0px;
+          margin-top: 0px;
+          margin-bottom: 0px;
+      };
+      canvas 
+      {
+        width: 100%; 
+        height: 100%; 
+      };
+    </style>
+  </head>
+    
+  <body>
+    <script src="../js/three.js"></script>
+    <script src="../js/holoplay.js"></script>
+        
+    <script>
+      //Basic elements for a Three.js/HoloPlay scene
+      var scene, camera, renderer, holoplay;
+            
+      //Lighting elements
+      var directionalLight;
+      var ambientLight;
+          
+      //Scene objects
+      var cubeGeometry;
+      var cubeMaterial;
+      var cubes;
+      var Slant,Pitch,Center;
+      
+      function makeMessageButton(){
+	var jsonObj;
+	var value = localStorage.getItem('Config');
+	jsonObj = JSON.parse(value);
+	var ScreenW=jsonObj.screenW.value;
+	var ScreenH=jsonObj.screenH.value;
+	Slant=jsonObj.slope.value;
+	var Degree=Math.atan(1/Slant);
+	Pitch=(jsonObj.DPI.value/jsonObj.pitch.value)*3/Math.cos(Degree);
+	Center=1.0-jsonObj.center.value;
+	if(Center>1.0) Center=Center-1.0;
+
+        var newHTML =
+            '<input type="button" style="margin:20px; position:fixed; top:0px; left:0px; z-index: 10000; height:50px; width:400px;" id="MessageButton" value=' + "W=" + ScreenW + ",H=" + ScreenH + ",Slant=" + Slant.toFixed(5) + ",Pitch=" + Pitch.toFixed(5) + ",Center=" + Center.toFixed(2) + " "+ '/><BR><input type="button" style="margin:20px; position:fixed; top:60px; left:0px; z-index: 10000; height:50px; width:300px;" id="JSONButton" value=' + "Click_to_Save_values_Original_Json "+ '/><BR><input type="button" style="margin:20px; position:fixed; top:120px; left:0px; z-index: 10000; height:50px; width:300px;" id="SPMButton" value=' + "Click_to_Save_values_for_SPM "+ '/><BR><input type="button" style="margin:20px; position:fixed; top:180px; left:0px; z-index: 10000; height:50px; width:300px;" id="YamadaButton" value=' + "Click_to_Save_values_for_mer2 "+ '/>';
+
+        var buttonDiv2 = document.createElement("div");
+
+        buttonDiv2.innerHTML = newHTML;
+
+       buttonDiv2.setAttribute("id", "message");
+
+        document.body.appendChild(buttonDiv2);
+
+    };            
+      //Initialize our variables
+      function init(){
+        scene = new THREE.Scene();
+        camera = new THREE.PerspectiveCamera(12.5, window.innerWidth/window.innerHeight, 0.1, 1000);
+        camera.position.set(0,0,20);
+        renderer = new THREE.WebGLRenderer();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+        holoplay = new HoloPlay(scene, camera, renderer);
+        directionalLight = new THREE.DirectionalLight(0xFFFFFF, 1);
+        directionalLight.position.set (0, 1, 2);
+        scene.add(directionalLight);
+        ambientLight = new THREE.AmbientLight(0xFFFFFF, 0.4);
+        scene.add(ambientLight);
+        cubes = [];
+        cubeGeometry = new THREE.BoxGeometry(1,1,1);
+        cubeMaterial = new THREE.MeshLambertMaterial();
+        for(var i = 0; i < 3; i++){
+          cubes.push(new THREE.Mesh(cubeGeometry, cubeMaterial));
+          cubes[i].position.set(1 - i, 1 - i, 1 - i);
+          scene.add(cubes[i]);       
+        }
+      }
+            
+      //Resize window on size change
+      window.addEventListener('resize', function(){
+        var width = window.innerWidth;
+        var height = window.innerHeight;
+        renderer.setSize(width, height);
+        camera.aspect = width/height;
+        camera.updateProjectionMatrix();
+      });
+    
+      //Add button presses
+      document.addEventListener('buttonPressed', function(e){
+        console.log("Pressed: " + e.name);
+        if(e.name == "left"){
+          camera.rotation.y += 0.002;
+        } else if(e.name == "right"){
+          camera.rotation.y -= 0.002;
+        } else if(e.name == "square"){
+          if(camera.position.z > 0.2){
+            camera.position.z -= 0.1;
+          }
+        } else if(e.name == "circle"){
+          if(camera.position.z < 100){
+            camera.position.z += 0.1;
+          }
+        }
+      });
+            
+      //Render the scene
+      function draw(){
+        holoplay.render();
+      }
+            
+      //Game loop
+      function RunApp(){
+        requestAnimationFrame(RunApp);
+        draw();
+      }
+            
+      init();
+
+	makeMessageButton();
+
+        document.getElementById('JSONButton').addEventListener("click", function(){
+		const c = document.createElement('a');
+		var value = localStorage.getItem('Config');
+		c.href = URL.createObjectURL(new Blob([value], {type: 'text/plain'}));
+		c.download = 'visual.json';
+		c.style.display = 'none';
+		document.body.appendChild(c);
+		c.click();
+		document.body.removeChild(c);
+        });
+        document.getElementById('SPMButton').addEventListener("click", function(){
+		const a = document.createElement('a');
+		var lkgdata='[Data]\nScreen Width=2560\nScreen Height=1600\nSlant='+Slant.toFixed(5)+'\nPitch='+Pitch.toFixed(5) +'\nShift='+Center.toFixed(2)+'\n';
+		a.href = URL.createObjectURL(new Blob([lkgdata], {type: 'text/plain'}));
+		a.download = 'spm_carib.lkg';
+		a.style.display = 'none';
+		document.body.appendChild(a);
+		a.click();
+		document.body.removeChild(a);
+        });
+        document.getElementById('YamadaButton').addEventListener("click", function(){
+		const b = document.createElement('a');
+		var lkgdata='#comment\n\n#slant\n'+Slant.toFixed(5)+'\n#pitch\n'+Pitch.toFixed(5) +'\n#shift\n'+Center.toFixed(2)+'\n';
+		b.href = URL.createObjectURL(new Blob([lkgdata], {type: 'text/plain'}));
+		b.download = 'NaE.txt';
+		b.style.display = 'none';
+		document.body.appendChild(b);
+		b.click();
+		document.body.removeChild(b);
+        });
+
+      RunApp();
+
+        
+    </script>
+  
+</body></html>

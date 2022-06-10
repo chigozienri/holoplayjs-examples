@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>
+      LKG 180 Shift Movie Viewer
+    </title>
+    <style>
+			body {
+				font-family: Monospace;
+				background-color: #000;
+				color: #fff;
+				margin: 0px;
+				overflow: hidden;
+			};
+    </style>
+  </head>
+    
+  <body>
+
+    <script src="../js/three.js"></script>
+    <script src="../js/OrbitControls.js"></script>
+    <script src="../js/holoplayido.js?" + new Date().getTime()></script>
+        
+    <script>
+      //Basic elements for a Three.js/HoloPlay scene
+	var scene, camera, renderer, holoplay;
+            
+      //Lighting elements
+	var ambientLight;
+          
+      //Scene objects
+	var geometry;
+	var material; 
+	var plane;
+	var isVideo=false;
+	var isStart=false;
+	var texture;
+	var image;
+	var quiltx;
+	var quilty;
+	var startTime;
+
+      //Initialize our variables
+      function init(){
+        renderer = new THREE.WebGLRenderer({
+  		preserveDrawingBuffer: true //���ꂪ�d�v
+		});
+	renderer.setPixelRatio( window.devicePixelRatio );
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+
+        scene = new THREE.Scene();
+
+	  var camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 1000);
+	  camera.position.set(0,0,3.0);
+//	  camera.lookAt(sphere.position);
+
+
+        scene.add(camera);
+
+        ambientLight = new THREE.AmbientLight(0xFFFFFF, 1.0);
+        scene.add(ambientLight);
+
+	  var geometry = new THREE.SphereBufferGeometry( 5, 60, 40 );
+		geometry.scale( - 1, 1, 1 );
+	    var uvs = geometry.attributes.uv.array;
+	    for (var i = 0; i < uvs.length; i+=2) {
+	      uvs[i] *= 2;
+	      uvs[i] -= .5;
+	    }
+
+	texture = new THREE.TextureLoader().load( 'howtoe.jpg' );
+	texture.minFilter = THREE.LinearFilter;
+	texture.magFilter = THREE.LinearFilter;
+	texture.format = THREE.RGBFormat;
+
+        material = new THREE.MeshPhongMaterial({
+            map: texture,              // �e�N�X�`��
+        });
+	sphere = new THREE.Mesh( geometry, material );
+	sphere.scale.set(0.625, 1, 1);
+	sphere.rotation.y = -Math.PI / 2;
+	scene.add( sphere );
+
+        holoplay = new HoloPlay(scene, camera, renderer);
+
+	var controls = new THREE.OrbitControls(camera,renderer.domElement);
+	controls.enableKeys=false;
+    	window.addEventListener("dragover", onCancel, false);
+    	window.addEventListener("dragenter", onCancel, false);
+	window.addEventListener("drop", onDropFile, false);
+//	startTime = getTime();
+      }
+
+    function loadfiletotex() {
+       //     cancelAnimationFrame(RunApp);
+         //   texture.dispose();
+         //   texture = null;
+
+            var file = files[0];
+            var createObjectURL = window.URL && window.URL.createObjectURL ?
+                function(file) {
+                    return window.URL.createObjectURL(file);
+                } : window.webkitURL && window.webkitURL.createObjectURL ?
+                function(file) {
+                    return window.webkitURL.createObjectURL(file);
+                } : undefined;
+
+            if (file.type.substring(0, 5) === 'video') {
+                ChangeCanvas = true;
+                video = document.createElement('video');
+		 video.addEventListener('ended', function(){
+		        video.play();
+		    }, true);
+                video.src = createObjectURL(file);
+		texture = new THREE.VideoTexture( video );
+		texture.minFilter = THREE.LinearFilter;
+		texture.magFilter = THREE.LinearFilter;
+		texture.format = THREE.RGBFormat;
+                video.play();
+                isVideo = true;
+		isStart=true;
+		HoloPlay.valuerest();
+	//	RunApp();
+            }
+
+	};
+           
+      //Resize window on size change
+      window.addEventListener('resize', function(){
+          var width = window.innerWidth;
+          var height = window.innerHeight;
+          renderer.setSize(width, height);
+          camera.aspect = width/height;
+          camera.updateProjectionMatrix();
+        });
+
+     var onDropFile = function(event) {
+        event.preventDefault();
+        files = event.dataTransfer.files; // FileList object
+        if (files.length > 0) {
+            loadfiletotex();
+        }
+    };
+  var onCancel = function(ev){            // �f�t�H���������L�����Z��
+    if(ev.preventDefault) { ev.preventDefault(); }
+    return false;
+  }; 
+
+	var now = window.performance && (
+	    performance.now || 
+	    performance.mozNow || 
+	    performance.msNow || 
+	    performance.oNow || 
+	    performance.webkitNow );
+
+	var getTime = function() {
+	    return ( now && now.call( performance ) ) || ( new Date().getTime() );
+	   }           
+      //Render the scene
+      function draw(){
+//	console.log("draw");
+        holoplay.render(scene, camera);
+//	console.log(getTime()-startTime); 
+	startTime = getTime();
+//	renderer.render(scene, camera);
+      }
+            
+      //Game loop
+      function RunApp(){
+//	setTimeout( RunApp, 1000 / 30 );
+        requestAnimationFrame(RunApp);
+	if(isVideo){
+		if (video.readyState === video.HAVE_ENOUGH_DATA) {
+		     if (texture) {
+			material.map = texture;
+			material.needsUpdate = true;
+			//	console.log("video");
+			draw();
+			}
+		    }
+	}
+	else {draw();}
+      }
+            
+      init();
+      RunApp();
+        
+    </script>
+  </body>
+</html>

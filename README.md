@@ -1,5 +1,5 @@
-# HoloPlay.js
+This is a collection of examples of the use of Holoplay.js
 
-HoloPlay.js is the main JS driver for the [Looking Glass](https://lookingglassfactory.com). It enables developers to render [three.js](https://threejs.org) scenes on any Looking Glass display.
+The examples in lookingglass are from https://docs.lookingglassfactory.com/developer-tools/three
 
-Find more information about [HoloPlay.js here](https://lookingglassfactory.com/devtools/holoplay-js-library).
+The examples in stereo_jpn_org_lkg are from http://stereo.jpn.org/lkg

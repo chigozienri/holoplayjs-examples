@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>
+      Little Planet
+    </title>
+    <style>
+	body {
+		font-family: Monospace;
+		background-color: #000;
+		color: #fff;
+		margin: 0px;
+		overflow: hidden;
+		-ms-overflow-style: none; /* IE対策 */
+		overflow: -moz-scrollbars-none; /* Firefox対策 */
+	};
+	body::-webkit-scrollbar { /* Google Chrome対策 */
+ 		display: none;
+		}
+    </style>
+  </head>
+    
+  <body>
+
+    <script src="js/three.js"></script>
+    <script src="js/holoplaydptlp.js?" + new Date().getTime()></script>
+        
+    <script>
+//Basic elements for a Three.js/HoloPlay scene
+var scene, camera, renderer, holoplay;
+//Lighting elements
+var ambientLight;
+var zoom = 45;
+var zoomini = 45;
+var hiReso = false;
+var canvasl = null;
+var canvasr = null;
+var ctxl = null;
+var ctxr = null;
+//Scene objects
+var geometry;
+var material;
+var plane;
+var texture;
+var image;
+var isVideo = false;
+var isStart = false;
+var ChangeCanvas = true;
+var filest = ['01.mp4','02.mp4','03.mp4'];
+var filenum;
+var filecur = 0;
+var mousedown = false;
+var onPointerDownPointerX0;
+var onPointerDownPointerY0;
+var curx = 0;
+var cury = 0;
+var btnenable = true;
+var bstart = true;
+var sshow = true;
+var nInterval = 5; //5sec.
+//Initialize our variables
+function init() {
+	filenum = filest.length;
+	renderer = new THREE.WebGLRenderer();
+	renderer.setPixelRatio(window.devicePixelRatio);
+	renderer.setSize(window.innerWidth, window.innerHeight);
+	document.body.appendChild(renderer.domElement);
+	scene = new THREE.Scene();
+	camera = new THREE.PerspectiveCamera(zoom, window.innerWidth / window.innerHeight, 1, 1000);
+	camera.position.set(curx, cury, 70);
+	scene.add(camera);
+	ambientLight = new THREE.AmbientLight(0xFFFFFF, 1.0);
+	scene.add(ambientLight);
+	geometry = new THREE.PlaneGeometry(96, 60, 256, 256);
+	loadfiletotex();
+	material = new THREE.MeshPhongMaterial({
+		map: texture, // テクスチャ
+	});
+	plane = new THREE.Mesh(geometry, material);
+	plane.geometry.verticesNeedUpdate = true;
+	plane.scale.set(1, 1, 1);
+	scene.add(plane);
+	holoplay = new HoloPlay(scene, camera, renderer,hiReso);
+	window.addEventListener("dragover", onCancel, false);
+	window.addEventListener("dragenter", onCancel, false);
+	window.addEventListener("drop", onDropFile, false);
+}
+
+function loadfiletotex2() {
+/*
+	var img;
+	img = document.createElement('img');
+	texture = new THREE.Texture();
+	texture.image = img;
+	img.src = filest[filecur];
+	img.onload = function() {
+		texture.needsUpdate = true;
+		texture.minFilter = THREE.LinearFilter;
+		texture.magFilter = THREE.LinearFilter;
+		//	texture.flipY = true;
+		isVideo = false;
+		const h = 1;
+		const w = (5 * img.width) / (16 * img.height);
+		plane.scale.set(w, h, 1);
+	};
+*/
+		var file = filest[filecur];
+		ChangeCanvas = false;
+		video = document.createElement('video');
+		video.addEventListener('ended', function() {
+			if(sshow) imgpaging(1);
+			else video.play();
+		}, true);
+		video.src = file;
+		texture = new THREE.VideoTexture(video);
+		texture.minFilter = THREE.LinearFilter;
+		texture.magFilter = THREE.LinearFilter;
+		texture.format = THREE.RGBFormat;
+		video.play();
+		isVideo = true;
+		isStart = true;
+};
+
+function loadfiletotex() {
+	//   cancelAnimationFrame(RunApp);
+	if(texture) {
+		texture.dispose();
+		texture = null;
+	}
+	if(bstart) {
+		loadfiletotex2();
+		return;
+	}
+	var file = files[filecur];
+	var createObjectURL = window.URL && window.URL.createObjectURL ? function(file) {
+		return window.URL.createObjectURL(file);
+	} : window.webkitURL && window.webkitURL.createObjectURL ? function(file) {
+		return window.webkitURL.createObjectURL(file);
+	} : undefined;
+	if(file.type.substring(0, 5) === 'video') {
+		ChangeCanvas = true;
+		video = document.createElement('video');
+		video.addEventListener('ended', function() {
+			if(sshow) imgpaging(1);
+			else video.play();
+		}, true);
+		video.src = createObjectURL(file);
+		video.play();
+		isVideo = true;
+		isStart = true;
+		//    RunApp();
+	} else {
+		var img;
+		img = document.createElement('img');
+		texture = new THREE.Texture();
+		texture.image = img;
+		img.onload = function() {
+			texture.needsUpdate = true;
+			texture.minFilter = THREE.LinearFilter;
+			texture.magFilter = THREE.LinearFilter;
+			//	texture.flipY = false;
+			isVideo = false;
+			const h = 1;
+			const w = (5 * img.width) / (16 * img.height);
+			plane.scale.set(w, h, 1);
+		};
+		img.src = createObjectURL(file);
+	}
+};
+
+function makeframe() {
+	if(video.paused) return;
+	vw = video.videoWidth;
+	vh = video.videoHeight;
+	const h = 1;
+	const w = (5 * video.videoWidth) / (16 * video.videoHeight);
+	//   console.log('w='+w+',h='+h);
+	plane.scale.set(w, h, 1);
+	if(vw > 0 && vh > 0 && ChangeCanvas) {
+		texture = new THREE.VideoTexture(video);
+		texture.minFilter = THREE.LinearFilter;
+		texture.magFilter = THREE.LinearFilter;
+		texture.format = THREE.RGBFormat;
+		//   texture.flipY = false;
+		ChangeCanvas = false;
+	}
+//	isStart=false;
+}
+document.addEventListener('mousedown', function(e) {
+	e.preventDefault();
+	mousedown = true;
+	onPointerDownPointerX0 = e.clientX;
+	onPointerDownPointerY0 = e.clientY;
+});
+document.addEventListener('mousemove', function(e) {
+	e.preventDefault();
+	if(mousedown) {
+		var dx = onPointerDownPointerX0 - e.clientX;
+		var dy = onPointerDownPointerY0 - e.clientY;
+		curx = curx + dx * 0.07;
+		cury = cury - dy * 0.07;
+		camera.position.set(curx, cury, 70);
+		onPointerDownPointerX0 = e.clientX;
+		onPointerDownPointerY0 = e.clientY;
+	}
+});
+document.addEventListener('mouseup', function(e) {
+	e.preventDefault();
+	mousedown = false;
+});
+zoomCamera = function(val) {
+		zoom += val * 0.02;
+		if(zoom < 5) zoom = 5;
+		if(zoom > 150) zoom = 150;
+		camera.fov = zoom;
+		camera.updateProjectionMatrix();
+	}
+	// chrome / safari / IE
+window.onmousewheel = function(e) {
+	var delta = e.deltaY ? e.deltaY : e.wheelDelta ? -e.wheelDelta : -e.wheelDeltaY * 0.2;
+	zoomCamera(delta);
+	e.preventDefault();
+};
+// firefox
+window.addEventListener("DOMMouseScroll", function(e) {
+	zoomCamera(e.detail * 5);
+	e.preventDefault();
+});
+window.addEventListener("dblclick", function(e) {
+	curx = 0;
+	cury = 0;
+	zoom = zoomini;
+	camera.position.set(curx, cury, 70);
+	zoomCamera(0);
+}, false);
+//Resize window on size change
+window.addEventListener('resize', function() {
+	var width = window.innerWidth;
+	var height = window.innerHeight;
+	renderer.setSize(width, height);
+	camera.aspect = width / height;
+	camera.updateProjectionMatrix();
+});
+var onDropFile = function(event) {
+	//	console.log("drop");
+	event.preventDefault();
+	files = event.dataTransfer.files; // FileList object
+	if(files.length > 0) {
+		filenum = files.length;
+		filecur = 0;
+		bstart = false;
+		loadfiletotex();
+	}
+};
+var onCancel = function(ev) { // デフォル処理をキャンセル
+	if(ev.preventDefault) {
+		ev.preventDefault();
+	}
+	return false;
+};
+
+function fromjsfnc(keycode) {
+	//    console.log(keycode);
+	if(keycode === 82) { //Rキー：リセット
+		curx = 0;
+		cury = 0;
+		zoom = zoomini;
+		camera.position.set(curx, cury, 70);
+		zoomCamera(0);
+	}
+	if(keycode === 65) { //a
+		changess();
+	}
+	if(keycode === 32) {
+		ssstop();
+		imgpaging(1);
+	}
+	if(keycode === 8) {
+		ssstop();
+		imgpaging(-1);
+	}
+}
+//Add button presses
+document.addEventListener('buttonPressed', function(e) {
+	// console.log("Pressed: " + e.name);
+	if(btnenable) {
+		btnenable = false;
+		if(e.name == "left") {
+			setTimeout(ClearFlag, 500);
+			ssstop();
+			imgpaging(-1);
+		} else if(e.name == "right") {
+			setTimeout(ClearFlag, 500);
+			ssstop();
+			imgpaging(1);
+		} else if(e.name == "square") {
+			setTimeout(ClearFlag, 50);
+			HoloPlay.valuerest(-1);
+		} else if(e.name == "circle") {
+			setTimeout(ClearFlag, 50);
+			HoloPlay.valuerest(1);
+		}
+	}
+});
+var ClearFlag = function() {
+	btnenable = true;
+};
+
+function videostart() {
+	if(isVideo && isStart){
+		video.play();
+		}
+	}
+
+function imgpaging(borf) {
+	if(filenum > 1) {
+		filecur = filecur + borf;
+		if(filecur > (filenum - 1)) filecur = 0;
+		if(filecur < 0) filecur = filenum - 1;
+		loadfiletotex();
+	}
+}
+//Render the scene
+function draw() {
+	texture.offset.x = 0.0;
+	texture.repeat.x = 0.5;
+	material.map = texture;
+	material.needsUpdate = true;
+	holoplay.render0(scene, camera);
+	texture.offset.x = 0.5;
+	texture.repeat.x = 0.5;
+	material.map = texture;
+	material.needsUpdate = true;
+	holoplay.render(scene, camera);
+	//	renderer.render(scene, camera);
+}
+//Game loop
+function RunApp() {
+	requestAnimationFrame(RunApp);
+	if(isVideo && isStart) makeframe();
+	draw();
+}
+
+function changess() {
+	sshow = !sshow;
+}
+
+function ssstop() {
+	sshow = false;
+}
+
+function tstart() {
+	setTimeout(tstart, nInterval * 1000);
+	if(sshow) {
+		imgpaging(1);
+	}
+}
+init();
+//tstart();
+RunApp();        
+    </script>
+  </body>
+</html>

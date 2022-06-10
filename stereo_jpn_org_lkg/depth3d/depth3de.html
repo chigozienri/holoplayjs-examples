@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>
+      LKG Depth 3D Viewer
+    </title>
+    <style>
+			body {
+				font-family: Monospace;
+				background-color: #000;
+				color: #fff;
+				margin: 0px;
+				overflow: hidden;
+			};
+			#info {
+				color: #fff;
+				position: absolute;
+				top: 5px;
+				width: 100%;
+				text-align: center;
+				z-index: 100;
+				display:block;
+			}
+			#info a {
+				color: #046;
+				font-weight: bold;
+			}
+    </style>
+  </head>
+    
+  <body>
+		<div id="info">
+			a
+		</div>
+
+    <script src="js/three.js"></script>
+    <script src="js/holoplay.js?" + new Date().getTime()></script>
+    <script src="js/OrbitControls.js"></script>
+        
+    <script>
+      //Basic elements for a Three.js/HoloPlay scene
+      var scene, camera, renderer, holoplay;
+            
+      //Lighting elements
+      var ambientLight;
+
+	var canvasl = null;
+	var canvasr = null;
+	var ctxl = null;
+	var ctxr = null;
+          
+      //Scene objects
+      var geometry;
+      var material; 
+      var plane;
+	var textured;
+	var texture;
+	var image;
+	var quiltx;
+	var quilty;
+	var ndpt=30;
+	var nbas=15;
+	var nRev=true;
+	var isVideo = false;
+	var isStart = false;
+	var ChangeCanvas = true;
+
+      //Initialize our variables
+      function init(){
+        renderer = new THREE.WebGLRenderer();
+	renderer.setPixelRatio( window.devicePixelRatio );
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+
+        scene = new THREE.Scene();
+
+        camera = new THREE.PerspectiveCamera(40, window.innerWidth/window.innerHeight, 1, 1000);
+        camera.position.set(0,0,70);
+        controls = new THREE.OrbitControls(camera, renderer.domElement );
+	controls.target.set( 0, 0.5, 0 );
+	controls.enablePan = false;
+
+        scene.add(camera);
+
+        ambientLight = new THREE.AmbientLight(0xFFFFFF, 1.0);
+        scene.add(ambientLight);
+
+        geometry = new THREE.PlaneGeometry(96, 54, 256, 256);
+
+	textured = new THREE.TextureLoader().load( 'depth.jpg' );
+	textured.minFilter = THREE.LinearFilter;
+	textured.magFilter = THREE.LinearFilter;
+	textured.format = THREE.RGBFormat;
+
+	texture = new THREE.TextureLoader().load( 'opene.jpg' );
+	texture.minFilter = THREE.LinearFilter;
+	texture.magFilter = THREE.LinearFilter;
+	texture.format = THREE.RGBFormat;
+	var nD=ndpt;
+	if(nRev) nD=-ndpt;
+	var nB=-nbas;
+	if(nRev) nB=nbas;
+        material = new THREE.MeshPhongMaterial({
+            side: THREE.DoubleSide,    // 両面に映す
+            map: texture,              // テクスチャ
+            displacementMap: textured,  // displacementのテクスチャ
+            displacementScale: nD,     // displacementの大きさ
+	    displacementBias: nB
+        });
+        plane = new THREE.Mesh(geometry, material);
+        plane.geometry.verticesNeedUpdate = true;
+        scene.add(plane);
+
+        holoplay = new HoloPlay(scene, camera, renderer,texture);
+
+
+    window.addEventListener("dragover", onCancel, false);
+    window.addEventListener("dragenter", onCancel, false);
+	window.addEventListener("drop", onDropFile, false);
+
+      }
+
+    function loadfiletotex() {
+    //        cancelAnimationFrame(RunApp);
+            texture.dispose();
+            texture = null;
+            textured.dispose();
+            textured = null;
+//	    holoplay.dispose();
+
+
+            var file = files[0];
+            var createObjectURL = window.URL && window.URL.createObjectURL ?
+                function(file) {
+                    return window.URL.createObjectURL(file);
+                } : window.webkitURL && window.webkitURL.createObjectURL ?
+                function(file) {
+                    return window.webkitURL.createObjectURL(file);
+                } : undefined;
+	
+	if(file.name.substr( 0, 2 ) === '24') {
+    		console.log('24');
+		quiltx=4;
+		quilty=6;
+		}
+	else if(file.name.substr( 0, 2 ) === '45'){
+    		console.log('45');
+		quiltx=5;
+		quilty=9;
+		}
+	else if(file.name.substr( 0, 2 ) === '60'){
+    		console.log('60');
+		quiltx=6;
+		quilty=10;
+		}
+	else {
+    		console.log('32');
+		quiltx=4;
+		quilty=8;
+		}
+	if (file.type.substring(0, 5) === 'video') {
+                ChangeCanvas = true;
+                video = document.createElement('video');
+		 video.addEventListener('ended', function(){
+		        video.play();
+		    }, true);
+                video.src = createObjectURL(file);
+                video.play();
+                isVideo = true;
+		isStart = true;
+      //          RunApp();
+            } else {
+	        var img;
+	        img = document.createElement('img');
+		img.onload = function() {
+
+                if (canvasl == null) canvasl = document.createElement('canvas');
+                canvasl.height = img.height;
+                canvasl.width = img.width / 2;
+                var ctxl = canvasl.getContext('2d');
+                    ctxl.drawImage(img, 0, 0, img.width/2, img.height, 0, 0, img.width/2, img.height);
+                texture = new THREE.Texture(canvasl);
+                texture.flipY = true;
+                texture.needsUpdate = true;
+                if (canvasr == null) canvasr = document.createElement('canvas');
+                canvasr.height = img.height;
+                canvasr.width = img.width / 2;
+                var ctxr = canvasr.getContext('2d');
+                    ctxr.drawImage(img, img.width/2, 0, img.width/2,
+                        img.height, 0, 0, img.width/2, img.height);
+                textured = new THREE.Texture(canvasr);
+                textured.flipY = true;
+                textured.needsUpdate = true;
+		material.map = texture;
+		material.displacementMap = textured;
+		material.needsUpdate = true;
+		isVideo = false;
+	//	RunApp();
+		};
+		img.src = createObjectURL(file);
+		}
+	
+	};
+
+    function makeframe() {
+            if (video.paused) return;
+            vw = video.videoWidth;
+            vh = video.videoHeight;
+		console.log(vw+","+vh);
+            if (vw > 0 && vh > 0 && ChangeCanvas) {
+                ChangeCanvas = false;
+                if (canvasl == null) canvasl = document.createElement(
+                    'canvas');
+                canvasl.height = vh;
+                canvasl.width = vw/2;
+                ctxl = canvasl.getContext('2d');
+                texture = new THREE.Texture(canvasl);
+                texture.flipY = true;
+                if (canvasr == null) canvasr = document.createElement(
+                    'canvas');
+                canvasr.height = vh;
+                canvasr.width = vw/2;
+                ctxr = canvasr.getContext('2d');
+                textured = new THREE.Texture(canvasr);
+                textured.flipY = true;
+            }
+            ctxl.drawImage(video, 0, 0, vw/2, vh, 0, 0, vw/2, vh);
+            if (texture != null) texture.needsUpdate = true;
+            ctxr.drawImage(video, vw/2, 0, vw/2, vh, 0, 0, vw/2, vh);
+            if (textured != null) textured.needsUpdate = true;
+        }
+           
+      //Resize window on size change
+      window.addEventListener('resize', function(){
+          var width = window.innerWidth;
+          var height = window.innerHeight;
+          renderer.setSize(width, height);
+          camera.aspect = width/height;
+          camera.updateProjectionMatrix();
+        });
+
+     var onDropFile = function(event) {
+        event.preventDefault();
+        files = event.dataTransfer.files; // FileList object
+        if (files.length > 0) {
+            loadfiletotex();
+        }
+    };
+  var onCancel = function(ev){            // デフォル処理をキャンセル
+    if(ev.preventDefault) { ev.preventDefault(); }
+    return false;
+  }; 
+
+      function fromjsfnc(keycode){
+        console.log(keycode);
+        if(keycode === 88){
+		nRev=!nRev;
+		keycode=1000;
+        }
+        if(keycode === 37){		//l
+	    ndpt--;
+	    keycode=1000;
+            }
+        if(keycode === 39){		//r
+	    ndpt++;
+	    keycode=1000;
+            }
+        if(keycode === 40){		//d
+	    nbas--;
+	    keycode=1000;
+            }
+        if(keycode === 38){		//u
+	    nbas++;
+	    keycode=1000;
+            }
+        if(keycode === 1000){
+		var nD=ndpt;
+		if(nRev) nD=-ndpt;
+		var nB=-nbas;
+		if(nRev) nB=nbas;
+		material.displacementScale = nD;
+		material.displacementBias= nB;
+		material.needsUpdate = true;
+        }
+
+      }
+           
+      //Render the scene
+      function draw(){
+        holoplay.render(scene, camera);
+//	renderer.render(scene, camera);
+      }
+            
+      //Game loop
+      function RunApp(){
+        requestAnimationFrame(RunApp);
+	if (isVideo && isStart) makeframe();
+	if(isVideo){
+		material.map = texture;
+		material.displacementMap = textured;
+		material.needsUpdate = true;
+		}
+        draw();
+      }
+            
+      init();
+      RunApp();
+        
+    </script>
+  </body>
+</html>

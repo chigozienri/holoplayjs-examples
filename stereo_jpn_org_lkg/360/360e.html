@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,height=device-height, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+<link rel="apple-touch-icon" href="icon.png" />
+    <title>LKG 360 Viewer</title>
+    <style>
+			body {
+				font-family: Monospace;
+				background-color: #000;
+				color: #fff;
+				margin: 0px;
+				overflow: hidden;
+				 -ms-overflow-style: none; /* IE�΍� */
+				 overflow: -moz-scrollbars-none; /* Firefox�΍� */
+			};
+			body::-webkit-scrollbar { /* Google Chrome�΍� */
+ 				display: none;
+			}
+    </style>
+    <script type="text/javascript" src="../js/three.js"></script>
+    <script type="text/javascript" src="../js/holoplaydpt360.js?" + new Date().getTime()></script>
+    <script type="text/javascript" src="../js/iosvideo.js"></script>
+    <script type="text/javascript" src="../js/thview3dlkg.js?" + new Date().getTime()></script>
+</head>
+
+<body>
+<div id="image1" style="position:absolute;top:0px;left:0px"></div>
+<div id="btn" style="position:fixed;bottom:0px;left:0px"><NOBR><button id='button6'> ** </button> <button id='button4'> Play </button> <button id='button1'> Prev </button> <button id='button2'> Next </button> <button id='button5'> Dev. </button> <button id='button3'> L/R </button> <button id='button0'> Stereo </button> <input type="file" id="files" name="files[]" multiple width:100px /></NOBR></div>
+    <script type="text/javascript" >
+        var img1 = new ThView({
+            id:'image1',
+            file:['p','opene.jpg','p','360_01.jpg','p','360_02.jpg','p','360_03.jpg'],
+        });
+    </script>
+</body>
+</html>

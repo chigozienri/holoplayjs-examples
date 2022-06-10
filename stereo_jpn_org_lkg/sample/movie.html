@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<!-- saved from url=(0050)http://www.kirurobo.com/test/stereo.jpn.org/quilt/ -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <title>
+    Quilt Movie Sample
+  </title>
+  <style>
+	body {
+		font-family: Monospace;
+		background-color: #000;
+		color: #fff;
+		margin: 0px;
+		overflow: hidden;
+		-ms-overflow-style: none; /* IE対策 */
+		overflow: -moz-scrollbars-none; /* Firefox対策 */
+	};
+	body::-webkit-scrollbar { /* Google Chrome対策 */
+ 		display: none;
+		}
+
+  </style>
+</head>
+
+<body>
+  <script src="js/three.js"></script>
+  <script src="js/holoplayquilt.js?" + new Date().getTime()></script>
+
+  <script>
+//Basic elements for a Three.js/HoloPlay scene
+var scene, camera, renderer, holoplay;
+//Lighting elements
+var directionalLight;
+var ambientLight;
+//Scene objects
+var cubeGeometry;
+var cubeMaterial;
+var cubes;
+var texture;
+var image;
+var quiltx;
+var quilty;
+var video = null;
+var isVideo = false;
+var isTilesIdentified = false;
+var filecur = 0;
+var filenum;
+var btnenable = true;
+var filest = ['rot_rose.mp4'];
+var bstart = true;
+var sshow = false;
+var nInterval = 5; //5sec.
+var dropArea = document.getElementById('dropImg');
+//Initialize our variables
+function init() {
+	filenum = filest.length;
+	scene = new THREE.Scene();
+	camera = new THREE.PerspectiveCamera(12.5, window.innerWidth / window.innerHeight, 0.1, 1000);
+	camera.position.set(0, 0, 20);
+	renderer = new THREE.WebGLRenderer();
+	renderer.setSize(window.innerWidth, window.innerHeight);
+	document.body.appendChild(renderer.domElement);
+	THREE.TextureLoader.crossOrigin = true;
+	var url = absoluteUrl('45_mon.jpg');
+	texture = new THREE.TextureLoader().load(url);
+	texture.minFilter = THREE.LinearFilter;
+	texture.magFilter = THREE.LinearFilter;
+	holoplay = new HoloPlay(scene, camera, renderer, texture);
+	window.addEventListener("dragover", onCancel, false);
+	window.addEventListener("dragenter", onCancel, false);
+	window.addEventListener("drop", onDropFile, false);
+}
+
+function absoluteUrl(url) {
+	var a = document.createElement('a');
+	a.href = url;
+	return a.href;
+}
+
+function loadfiletotex() {
+	//   cancelAnimationFrame(RunApp);
+	if(texture) {
+		texture.dispose();
+		texture = null;
+	}
+	//	    holoplay.dispose();
+	if(video) {
+		video.pause();
+		video.currentTime = 0;
+		video = null;
+	}
+	HoloPlay.valuerest(0);
+	var file;
+	var topfile;
+	if(bstart) {
+		file = filest[filecur];
+		topfile = file.substr(0, 2);
+	} else {
+		file = files[filecur];
+		var createObjectURL = window.URL && window.URL.createObjectURL ? function(file) {
+			return window.URL.createObjectURL(file);
+		} : window.webkitURL && window.webkitURL.createObjectURL ? function(file) {
+			return window.webkitURL.createObjectURL(file);
+		} : undefined;
+		topfile = file.name.substr(0, 2);
+	}
+	isTilesIdentified = true;
+	if(topfile === '24') {
+		//console.log('24');
+		quiltx = 4;
+		quilty = 6;
+	} else if(topfile === '45') {
+		//console.log('45');
+		quiltx = 5;
+		quilty = 9;
+	} else if(topfile === '60') {
+		//console.log('60');
+		quiltx = 6;
+		quilty = 10;
+	} else if(topfile === '77') {
+		//console.log('77');
+		quiltx = 7;
+		quilty = 11;
+	} else {
+		//console.log('32');
+		quiltx = 4;
+		quilty = 8;
+		// タイル数がファイル名から特定できなかった
+		isTilesIdentified = false;
+	}
+	if(isTilesIdentified) {
+		holoplay.setquiltxy(quiltx, quilty);
+	}
+	if(bstart) {
+/*
+		texture = new THREE.TextureLoader().load(file);
+		texture.minFilter = THREE.LinearFilter;
+		texture.magFilter = THREE.LinearFilter;
+		texture.format = THREE.RGBFormat;
+		holoplay.changetex(texture);
+		//		holoplay = new HoloPlay(scene, camera, renderer,texture);
+		isVideo = false;
+		if(isTilesIdentified) {
+			holoplay.endTileEstimation();
+		} else {
+			holoplay.startTileEstimation();
+		}
+*/
+	        video = document.createElement('video');
+	        video.addEventListener('loadeddata', function () {
+	          //video.play();
+	          
+	          if (isTilesIdentified) {
+	            holoplay.endTileEstimation();
+	          } else {
+	            holoplay.startTileEstimation();
+	          }
+	        }, true);
+	        video.addEventListener('ended', function () {
+	          video.play();
+	        }, true);
+	        
+	        video.src = file;
+	        //              window.makeVideoPlayableInline(video);
+	        texture = new THREE.VideoTexture(video);
+	        texture.minFilter = THREE.LinearFilter;
+	        texture.magFilter = THREE.LinearFilter;
+	        texture.format = THREE.RGBFormat;
+	        isVideo = true;
+	} else if(file.type.substring(0, 5) === 'video') {
+		video = document.createElement('video');
+		video.addEventListener('loadeddata', function() {
+			video.play();
+			if(isTilesIdentified) {
+				holoplay.endTileEstimation();
+			} else {
+				holoplay.startTileEstimation();
+			}
+		}, true);
+		video.addEventListener('ended', function() {
+			video.play();
+		}, true);
+		video.src = createObjectURL(file);
+		//              window.makeVideoPlayableInline(video);
+		texture = new THREE.VideoTexture(video);
+		texture.minFilter = THREE.LinearFilter;
+		texture.magFilter = THREE.LinearFilter;
+		texture.format = THREE.RGBFormat;
+		//video.play();
+		isVideo = true;
+		//    RunApp();
+	} else {
+		image = new Image();
+		image.src = createObjectURL(file);
+		texture = new THREE.Texture();
+		texture.image = image;
+		image.onload = function() {
+			texture.needsUpdate = true;
+			//	texture = new THREE.TextureLoader().load( 'quilt03.jpg' );
+			//		console.log('quilt03.jpg');
+			texture.minFilter = THREE.LinearFilter;
+			texture.magFilter = THREE.LinearFilter;
+			holoplay.changetex(texture);
+			//		holoplay = new HoloPlay(scene, camera, renderer,texture);
+			isVideo = false;
+			if(isTilesIdentified) {
+				holoplay.endTileEstimation();
+			} else {
+				holoplay.startTileEstimation();
+			}
+			//       RunApp();
+		}
+	};
+};
+//Resize window on size change
+window.addEventListener('resize', function() {
+	var width = window.innerWidth;
+	var height = window.innerHeight;
+	renderer.setSize(width, height);
+	camera.aspect = width / height;
+	camera.updateProjectionMatrix();
+});
+var onDropFile = function(event) {
+	event.preventDefault();
+	files = event.dataTransfer.files; // FileList object
+	if(files.length > 0) {
+		bstart = false;
+		filenum = files.length;
+		filecur = 0;
+		loadfiletotex();
+	}
+};
+var onCancel = function(ev) { // デフォル処理をキャンセル
+	if(ev.preventDefault) {
+		ev.preventDefault();
+	}
+	return false;
+};
+
+function estimateTileNumber(tex) {
+	var imagedata = getImageData(tex.image);
+	for(var y = 0; y < imagedata.height; y++) {
+		for(var x = 0; x < imageadta.width; x++) {
+			var col = getPixel(imagedata, x, y);
+		}
+	}
+	//console.log("Col: " + col);
+}
+//Add button presses
+document.addEventListener('buttonPressed', function(e) {
+	//console.log("Pressed: " + e.name);
+	if(btnenable) {
+		btnenable = false;
+		if(e.name == "left") {
+			setTimeout(ClearFlag, 500);
+			ssstop();
+			imgpaging(-1);
+		} else if(e.name == "right") {
+			setTimeout(ClearFlag, 500);
+			ssstop();
+			imgpaging(1);
+		} else if(e.name == "square") {
+			setTimeout(ClearFlag, 200);
+			HoloPlay.valuerest(-1);
+		} else if(e.name == "circle") {
+			setTimeout(ClearFlag, 200);
+			HoloPlay.valuerest(1);
+		}
+	}
+});
+var ClearFlag = function() {
+	btnenable = true;
+};
+
+function videostart() {
+	video.play();
+	}
+//Render the scene
+function draw() {
+	holoplay.render();
+}
+
+function imgpaging(borf) {
+	if(filenum > 1) {
+		filecur = filecur + borf;
+		if(filecur > (filenum - 1)) filecur = 0;
+		if(filecur < 0) filecur = filenum - 1;
+		loadfiletotex();
+	}
+}
+
+function changess() {
+	sshow=!sshow;
+	}
+
+function ssstop() {
+	sshow=false;
+	}
+//Game loop
+function RunApp() {
+	requestAnimationFrame(RunApp);
+	if(isVideo) {
+		if(video != null && video.readyState === video.HAVE_ENOUGH_DATA) {
+			if(texture) {
+				holoplay.changetex(texture);
+			}
+		}
+	}
+	draw();
+}
+
+function tstart(){
+	setTimeout(tstart, nInterval*1000);
+	if(sshow){
+		imgpaging(1);
+		}
+	}
+init();
+loadfiletotex();
+tstart();
+RunApp(); 
+</script>
+</body>
+</html>
