@@ -34,14 +34,14 @@
       document.getElementById("log").innerHTML += msg;
     }
     function showCalibration(data) {
-      let msg;
+      console.log(data);
       if (data.error != 0) {
         // error codes
 
       } else if (data.devices === []) {
         log("No Looking Glass found");
       } else {
-        let calibration = JSON.stringify(msg, null, 2);
+        let calibration = JSON.stringify(data, null, 2);
         document.getElementById("calibration").innerHTML = calibration;
       }
     }
@@ -49,3 +49,4 @@
     </script>
   </body>
 </html>
+
