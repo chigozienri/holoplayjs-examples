@@ -9,10 +9,10 @@ The example in holoplaycore is from [https://codesandbox.io/s/hardcore-butterfly
 - [Test Setup](holoplaycore/index.html) shows how to directly send a quilt to a connected Looking Glass device using holoplaycore (without moving a window over)
 
 The examples in lookingglass are from [https://docs.lookingglassfactory.com/developer-tools/three](https://docs.lookingglassfactory.com/developer-tools/three)
-- [lookingglass/examples/basic](basic) shows how to use HoloPlay in place of a regular three.js camera
-- [lookingglass/examples/buttons](buttons) shows how to receive events from the Looking Glass buttons (on models which have left/right/square/circle buttons)
-- [lookingglass/examples/debugobptions](debugoptions) shows how to switch between display modes (2D/3D/Quilt)
-- [lookingglass/examples/gltf](gltf) shows how to display a glTF
+- [basic](lookingglass/examples/basic) shows how to use HoloPlay in place of a regular three.js camera
+- [buttons](lookingglass/examples/buttons) shows how to receive events from the Looking Glass buttons (on models which have left/right/square/circle buttons)
+- [debugoptions](lookingglass/examples/debugobptions) shows how to switch between display modes (2D/3D/Quilt)
+- [gltf](lookingglass/examples/gltf) shows how to display a glTF
 
 The examples in stereo_jpn_org_lkg are from [http://stereo.jpn.org/lkg](http://stereo.jpn.org/lkg)
 - [Carib](stereo_jpn_org_lkg/carib/index.html) shows how to access the calibration values.
