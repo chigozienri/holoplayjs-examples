@@ -2,7 +2,7 @@
 This repository collects together several examples of how to use JavaScript with looking glass devices, which exist on the internet but not on GitHub.
 
 ## Quickstart
-1. Make sure your Looking Glass light field display is connected over USB and HDMI
+1. Make sure your Looking Glass light field display is connected over USB and HDMI.
 2. Make sure the [Holoplay Service](https://docs.lookingglassfactory.com/getting-started/holoplay-service#holoplay-service) is installed.
 3. Click on one of the examples in [https://chigozienri.github.io/holoplayjs-examples/#Examples](https://chigozienri.github.io/holoplayjs-examples/#Examples)
 
