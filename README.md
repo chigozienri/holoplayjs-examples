@@ -5,11 +5,11 @@ To run the examples in this repository locally, you will need to [run a local se
 
 To view the examples in this repository, you will need to have a Looking Glass light field display, and have installed the [Holoplay Service](https://docs.lookingglassfactory.com/getting-started/holoplay-service#holoplay-service)
 
-### The examples in holoplaycore use [holoplaycore 0.0.7](https://unpkg.com/browse/holoplay-core@0.0.7) or  [holoplaycore 0.0.8](https://unpkg.com/browse/holoplay-core@0.0.8)
+### The examples in holoplaycore use [holoplaycore 0.0.7](https://unpkg.com/holoplay-core@0.0.7/) or  [holoplaycore 0.0.8](https://unpkg.com/holoplay-core@0.0.8/)
 - [Test Setup](holoplaycore/senddirect/index.html) shows how to directly send a quilt to a connected Looking Glass device using holoplaycore (without moving a window over). It is from [https://codesandbox.io/s/hardcore-butterfly-l5o9d](https://codesandbox.io/s/hardcore-butterfly-l5o9d) and is used [here](https://docs.lookingglassfactory.com/getting-started/portrait#test-your-setup).
-- [Diagnostic](holoplaycore/diagnostic/index.html) displays the device calibration. It is the example from [https://unpkg.com/browse/holoplay-core@0.0.7/examples/](https://unpkg.com/browse/holoplay-core@0.0.7/examples/)
+- [Diagnostic](holoplaycore/diagnostic/index.html) displays the device calibration. It is the example from [https://unpkg.com/holoplay-core@0.0.7/examples/](https://unpkg.com/holoplay-core@0.0.7/examples/)
 
-The following 4 examples come from [holoplaycore 0.0.8 examples](https://unpkg.com/browse/holoplay-core@0.0.8/examples)
+The following 4 examples come from [holoplaycore 0.0.8 examples](https://unpkg.com/holoplay-core@0.0.8/examples/)
 - [calibrationDebugger](holoplaycore/0.0.8/calibrationDebugger/index.html) is the example referenced [here](https://docs.lookingglassfactory.com/holoplay-core/holoplaycorejs/api/examples#calibrationdebugger). This example demonstrates how to use HoloPlayCore.js to view calibration data and debug when there's a problem with the Looking Glass.
 - [esModuleImport](holoplaycore/0.0.8/esModuleImport/index.html) is the example referenced [here](https://docs.lookingglassfactory.com/holoplay-core/holoplaycorejs/api/examples#esmoduleimport). This example demonstrates how to use the ES6 module version of HoloPlayCore.js, namely holoplaycore.module.js.
 - [nodejs](holoplaycore/0.0.8/nodejs/main.js) is the example referenced [here](https://docs.lookingglassfactory.com/holoplay-core/holoplaycorejs/api/examples#nodejs). This example demonstrates how to use HoloPlayCore.js in Node.js. 
