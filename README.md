@@ -7,7 +7,17 @@ This repository collects together several examples of how to use JavaScript with
 3. Click on one of the examples in [https://chigozienri.github.io/holoplayjs-examples/#Examples](https://chigozienri.github.io/holoplayjs-examples/#Examples)
 
 ## Running locally
-To run the examples in this repository locally, you will need to [run a local server](https://docs.lookingglassfactory.com/developer-tools/three/localserver)
+To run the examples in this repository locally, you will need to [run a local server](https://docs.lookingglassfactory.com/developer-tools/three/localserver).
+For example, after cloning the repo with 
+```
+git clone https://github.com/chigozienri/holoplayjs-examples.git
+cd holoplayjs-examples
+```
+you can run
+```
+python -m SimpleHTTPServer 8000
+```
+in the root of the repo, then visit http://localhost:8000/ in your browser.
 
 
 ## Examples
