@@ -78,5 +78,6 @@ The examples in stereo_jpn_org_lkg are from [http://stereo.jpn.org/lkg](http://s
 - [Rose](stereo_jpn_org_lkg/sample/movie.html) shows how to display a quilt movie.
 - [Sample Misc](stereo_jpn_org_lkg/sample/sshow.html) shows various examples of 2D RGB + Depth images.
 
-### p5
-A p5 library by @JuanIrache is available [here](https://github.com/JuanIrache/p5-holoplay)
+### Other libraries
+- A p5 library by @JuanIrache is available [here](https://github.com/JuanIrache/p5-holoplay).
+- A WebXR library by @kainino0x is available [here](https://github.com/kainino0x/holoplay-webxr) with live examples [here](https://kai.graphics/holoplay-webxr/third_party/webxr-samples/).
