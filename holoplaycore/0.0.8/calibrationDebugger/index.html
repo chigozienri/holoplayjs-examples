@@ -24,27 +24,16 @@
         <div id="calibration"></div>
       </code></pre>
     </div>
-    <script src="../../dist/holoplaycore.js"></script>
     <!-- scripts -->
-    <script>
-      let client;
-      const errorCodes = {
-        0: "No error, everything ok",
-        1: "CBOR parser failure",
-        2: "HoPS could not understand the command",
-        3: "HoPS expected an image file in binary data, but could not read one",
-        4: "Client attempted to draw to a Looking Glass that is not connected or has no calibration",
-        5: "Client attempted to load a nonexistent key from the cache",
-        6: "Client attempted to register an app ID after sending one or more messages",
-        7: "Client attempted to do something that is not allowed"
-      };
+    <script type="module">
+      import * as HoloPlayCore from 'https://unpkg.com/holoplay-core@0.0.8/dist/holoplaycore.module.js';
 
-      // initialize HoloPlay Core client once the page is ready
+      let client;
       (function() {
         client = new HoloPlayCore.Client(message => {
           showCalibration(message);
         }, error => { 
-          showError(error);
+          driverError(error);
         });
       })();
       
@@ -52,8 +41,8 @@
         document.getElementById("hops-status").innerHTML = "HoloPlay Service running. Version: " + data['version'];
         if (data.error != 0) {
           // error codes
-          let errorMsg = errorCodes[data.error];
-          document.getElementById("lkg-status").innerHTML = "HoloPlay Service error. Error: " + errorMsg;
+          document.getElementById("lkg-status").innerHTML = "HoloPlay Service error. Error code: " + data.error.toString();
+
         } else if (data.devices.length === 0) {
           // no lkg
           document.getElementById("lkg-status").innerHTML = "No Looking Glass connected.";
@@ -73,10 +62,9 @@
       function log(msg) {
         document.getElementById("log").innerHTML += msg;
       }
-      function showError(err) {
+      function driverError(err) {
         document.getElementById("hops-status").innerHTML = "HoloPlay Service not detected.";
       }
-
     </script>
   </body>
 </html>
