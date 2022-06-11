@@ -22,10 +22,11 @@ in the root of the repo, then visit http://localhost:8000/ in your browser.
 
 ## Examples
 ### Holoplaycore.js (without Three.js)
-The examples in holoplaycore use [holoplaycore 0.0.7](https://unpkg.com/holoplay-core@0.0.7/) or [holoplaycore 0.0.8](https://unpkg.com/holoplay-core@0.0.8/)
+#### [holoplaycore 0.0.7](https://unpkg.com/holoplay-core@0.0.7/)
 - [Test Setup](holoplaycore/senddirect/index.html) shows how to directly send a quilt to a connected Looking Glass device using holoplaycore (without moving a window over). It is from [https://codesandbox.io/s/hardcore-butterfly-l5o9d](https://codesandbox.io/s/hardcore-butterfly-l5o9d) and is used [here](https://docs.lookingglassfactory.com/getting-started/portrait#test-your-setup).
 - [Diagnostic](holoplaycore/diagnostic/index.html) displays the device calibration. It is the example from [holoplaycore 0.0.7 examples](https://unpkg.com/holoplay-core@0.0.7/examples/)
 
+#### [holoplaycore 0.0.8](https://unpkg.com/holoplay-core@0.0.8/)
 The following 4 examples come from [holoplaycore 0.0.8 examples](https://unpkg.com/holoplay-core@0.0.8/examples/)
 - [calibrationDebugger](holoplaycore/0.0.8/calibrationDebugger/index.html) is the example referenced [here](https://docs.lookingglassfactory.com/holoplay-core/holoplaycorejs/api/examples#calibrationdebugger). This example demonstrates how to use HoloPlayCore.js to view calibration data and debug when there's a problem with the Looking Glass.
 - [esModuleImport](holoplaycore/0.0.8/esModuleImport/index.html) is the example referenced [here](https://docs.lookingglassfactory.com/holoplay-core/holoplaycorejs/api/examples#esmoduleimport). This example demonstrates how to use the ES6 module version of HoloPlayCore.js, namely holoplaycore.module.js.
