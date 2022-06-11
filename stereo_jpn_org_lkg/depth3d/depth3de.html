@@ -33,9 +33,9 @@
 			a
 		</div>
 
-    <script src="js/three.js"></script>
-    <script src="js/holoplay.js?" + new Date().getTime()></script>
-    <script src="js/OrbitControls.js"></script>
+    <script src="../js/three.js"></script>
+    <script src="../js/holoplay.js?" + new Date().getTime()></script>
+    <script src="../js/OrbitControls.js"></script>
         
     <script>
       //Basic elements for a Three.js/HoloPlay scene
@@ -101,10 +101,10 @@
 	var nB=-nbas;
 	if(nRev) nB=nbas;
         material = new THREE.MeshPhongMaterial({
-            side: THREE.DoubleSide,    // —¼–Ê‚É‰f‚·
-            map: texture,              // ƒeƒNƒXƒ`ƒƒ
-            displacementMap: textured,  // displacement‚ÌƒeƒNƒXƒ`ƒƒ
-            displacementScale: nD,     // displacement‚Ì‘å‚«‚³
+            side: THREE.DoubleSide,    // ä¸¡é¢ã«æ˜ ã™
+            map: texture,              // ãƒ†ã‚¯ã‚¹ãƒãƒ£
+            displacementMap: textured,  // displacementã®ãƒ†ã‚¯ã‚¹ãƒãƒ£
+            displacementScale: nD,     // displacementã®å¤§ãã•
 	    displacementBias: nB
         });
         plane = new THREE.Mesh(geometry, material);
@@ -246,7 +246,7 @@
             loadfiletotex();
         }
     };
-  var onCancel = function(ev){            // ƒfƒtƒHƒ‹ˆ—‚ğƒLƒƒƒ“ƒZƒ‹
+  var onCancel = function(ev){            // ãƒ‡ãƒ•ã‚©ãƒ«å‡¦ç†ã‚’ã‚­ãƒ£ãƒ³ã‚»ãƒ«
     if(ev.preventDefault) { ev.preventDefault(); }
     return false;
   }; 
