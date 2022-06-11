@@ -35,23 +35,23 @@ The following 4 examples come from [holoplaycore 0.0.8 examples](https://unpkg.c
 - [Half Width 2D+Depth](stereo_jpn_org_lkg/hwdepth/depthe.html) shows how to switch between half/full width.
 - [Horizontal Shift movies](stereo_jpn_org_lkg/ido/idoe.html) shows how to
 - [180 Horizontal Shift movies](stereo_jpn_org_lkg/ido180/ido180e.html) shows how to
-- [Panorama](stereo_jpn_org_lkg/pano/pano.html) shows how to
-- [iPhone](stereo_jpn_org_lkg/portrait/portraite.html) shows how to
-- [Quilt](stereo_jpn_org_lkg/quilt/Quilte.html) shows how to
-- [Lucy model](stereo_jpn_org_lkg/refraction/refraction.html) shows how to
-- [Takamatsu](stereo_jpn_org_lkg/takamatsu/takamatsue.html) shows how to
-- [Octaminator](stereo_jpn_org_lkg/tako/assimp.html) shows how to
-- [Little Tokyo](stereo_jpn_org_lkg/tokyo/tokyo.html) shows how to
-- [Kandao](stereo_jpn_org_lkg/sample/360/index.html) shows how to
-- [Flowers](stereo_jpn_org_lkg/sample/flower/flower.html) shows how to
+- [Panorama](stereo_jpn_org_lkg/pano/pano.html) shows how to display an equirectangular spherical image (no depth data)
+- [iPhone](stereo_jpn_org_lkg/portrait/portraite.html) shows how to display depth images from a dual lens iPhone (separate RGB and depth images)
+- [Quilt](stereo_jpn_org_lkg/quilt/Quilte.html) shows how to display quilt images/movies.
+- [Lucy model](stereo_jpn_org_lkg/refraction/refraction.html) shows how to display a skybox and light refraction through a transparent model.
+- [Takamatsu](stereo_jpn_org_lkg/takamatsu/takamatsue.html) shows how to display depth-only grayscale images
+- [Octaminator](stereo_jpn_org_lkg/tako/assimp.html) shows how to display assimp files (animated 3D octaminator model)
+- [Little Tokyo](stereo_jpn_org_lkg/tokyo/tokyo.html) shows how to display animated glTFs (a diorama of a cute Tokyo block with animated tram)
+- [Kandao](stereo_jpn_org_lkg/sample/360/index.html) shows how to display a VR360 image with an equirectangular RGB+Depth map image or movie.
+- [Flowers](stereo_jpn_org_lkg/sample/flower/flower.html) shows how to animate a static RGB+Depth image.
 - [Shift Movie misc](stereo_jpn_org_lkg/sample/ido/index.html) shows how to
 - [Planet](stereo_jpn_org_lkg/sample/littlep/index.html) shows how to
-- [Macro Room](stereo_jpn_org_lkg/sample/macro/index.html) shows how to
-- [Depth misc](stereo_jpn_org_lkg/sample/misc/misc.html) shows how to
-- [Qoocam](stereo_jpn_org_lkg/sample/qoocam/index.html) shows how to
-- [Stereo Club Tokyo](stereo_jpn_org_lkg/sample/sct/index.html) shows how to
-- [Sample Takamatsu](stereo_jpn_org_lkg/sample/takamatsu/index.html) shows how to
-- [Mt. Tsukuba](stereo_jpn_org_lkg/sample/tsukuba/index.html) shows how to
+- [Macro Room](stereo_jpn_org_lkg/sample/macro/index.html) shows how to display quilt images which use the different angles for animation instead of a 3D effect (like an animated lenticular postcard).
+- [Depth misc](stereo_jpn_org_lkg/sample/misc/misc.html) shows various 2D RGB + Depth examples
+- [Qoocam](stereo_jpn_org_lkg/sample/qoocam/index.html) shows various VR180 RGB + Depth examples
+- [Stereo Club Tokyo](stereo_jpn_org_lkg/sample/sct/index.html) shows various 2D RGB + Depth examples
+- [Sample Takamatsu](stereo_jpn_org_lkg/sample/takamatsu/index.html) shows various depth-only examples
+- [Mt. Tsukuba](stereo_jpn_org_lkg/sample/tsukuba/index.html) shows a 2D RGB + Depth movie
 - [Magic World](stereo_jpn_org_lkg/sample/magic.html) shows how to
 - [Rose](stereo_jpn_org_lkg/sample/movie.html) shows how to
 - [Sample Misc](stereo_jpn_org_lkg/sample/sshow.html) shows how to
