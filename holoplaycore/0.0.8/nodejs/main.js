@@ -1,4 +1,4 @@
-const HoloPlayCore = require('https://unpkg.com/holoplay-core@0.0.7/dist/holoplaycore.min.js');
+const HoloPlayCore = require('../../dist/holoplaycore.js');
 
 const client = new HoloPlayCore.Client(
     (msg) => {
