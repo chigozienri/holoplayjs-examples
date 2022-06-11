@@ -83,3 +83,6 @@ The examples in stereo_jpn_org_lkg are from [http://stereo.jpn.org/lkg](http://s
 ### Other libraries
 - A p5 library by @JuanIrache is available [here](https://github.com/JuanIrache/p5-holoplay).
 - A WebXR library by @kainino0x is available [here](https://github.com/kainino0x/holoplay-webxr) with live examples [here](https://kai.graphics/holoplay-webxr/third_party/webxr-samples/).
+
+### Misc
+Need to convert an ordinary RGB image to RGBD to use in these examples? Click [here](RGB-Depthify.html) to access a hosted version of wrote [RGB-Depthify](https://github.com/jankais3r/RGB-Depthify) by @jankais3r
