@@ -12,10 +12,10 @@
 		color: #fff;
 		margin: 0px;
 		overflow: hidden;
-		-ms-overflow-style: none; /* IE‘Îô */
-		overflow: -moz-scrollbars-none; /* Firefox‘Îô */
+		-ms-overflow-style: none; /* IEå¯¾ç­– */
+		overflow: -moz-scrollbars-none; /* Firefoxå¯¾ç­– */
 	};
-	body::-webkit-scrollbar { /* Google Chrome‘Îô */
+	body::-webkit-scrollbar { /* Google Chromeå¯¾ç­– */
  		display: none;
 		}
 
@@ -23,8 +23,8 @@
 </head>
 
 <body>
-  <script src="js/three.js"></script>
-  <script src="js/holoplayquilt.js?" + new Date().getTime()></script>
+  <script src="../js/three.js"></script>
+  <script src="../js/holoplayquilt.js?" + new Date().getTime()></script>
 
   <script>
 //Basic elements for a Three.js/HoloPlay scene
@@ -125,7 +125,7 @@ function loadfiletotex() {
 		//console.log('32');
 		quiltx = 4;
 		quilty = 8;
-		// ƒ^ƒCƒ‹”‚ªƒtƒ@ƒCƒ‹–¼‚©‚ç“Á’è‚Å‚«‚È‚©‚Á‚½
+		// ã‚¿ã‚¤ãƒ«æ•°ãŒãƒ•ã‚¡ã‚¤ãƒ«åã‹ã‚‰ç‰¹å®šã§ããªã‹ã£ãŸ
 		isTilesIdentified = false;
 	}
 	if(isTilesIdentified) {
@@ -230,7 +230,7 @@ var onDropFile = function(event) {
 		loadfiletotex();
 	}
 };
-var onCancel = function(ev) { // ƒfƒtƒHƒ‹ˆ—‚ğƒLƒƒƒ“ƒZƒ‹
+var onCancel = function(ev) { // ãƒ‡ãƒ•ã‚©ãƒ«å‡¦ç†ã‚’ã‚­ãƒ£ãƒ³ã‚»ãƒ«
 	if(ev.preventDefault) {
 		ev.preventDefault();
 	}
