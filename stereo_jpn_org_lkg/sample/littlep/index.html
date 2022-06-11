@@ -11,10 +11,10 @@
 		color: #fff;
 		margin: 0px;
 		overflow: hidden;
-		-ms-overflow-style: none; /* IE‘Îô */
-		overflow: -moz-scrollbars-none; /* Firefox‘Îô */
+		-ms-overflow-style: none; /* IEå¯¾ç­– */
+		overflow: -moz-scrollbars-none; /* Firefoxå¯¾ç­– */
 	};
-	body::-webkit-scrollbar { /* Google Chrome‘Îô */
+	body::-webkit-scrollbar { /* Google Chromeå¯¾ç­– */
  		display: none;
 		}
     </style>
@@ -22,8 +22,8 @@
     
   <body>
 
-    <script src="js/three.js"></script>
-    <script src="js/holoplaydptlp.js?" + new Date().getTime()></script>
+    <script src="../js/three.js"></script>
+    <script src="../js/holoplaydptlp.js?" + new Date().getTime()></script>
         
     <script>
 //Basic elements for a Three.js/HoloPlay scene
@@ -74,7 +74,7 @@ function init() {
 	geometry = new THREE.PlaneGeometry(96, 60, 256, 256);
 	loadfiletotex();
 	material = new THREE.MeshPhongMaterial({
-		map: texture, // ƒeƒNƒXƒ`ƒƒ
+		map: texture, // ãƒ†ã‚¯ã‚¹ãƒãƒ£
 	});
 	plane = new THREE.Mesh(geometry, material);
 	plane.geometry.verticesNeedUpdate = true;
@@ -252,7 +252,7 @@ var onDropFile = function(event) {
 		loadfiletotex();
 	}
 };
-var onCancel = function(ev) { // ƒfƒtƒHƒ‹ˆ—‚ğƒLƒƒƒ“ƒZƒ‹
+var onCancel = function(ev) { // ãƒ‡ãƒ•ã‚©ãƒ«å‡¦ç†ã‚’ã‚­ãƒ£ãƒ³ã‚»ãƒ«
 	if(ev.preventDefault) {
 		ev.preventDefault();
 	}
@@ -261,7 +261,7 @@ var onCancel = function(ev) { // ƒfƒtƒHƒ‹ˆ—‚ğƒLƒƒƒ“ƒZƒ‹
 
 function fromjsfnc(keycode) {
 	//    console.log(keycode);
-	if(keycode === 82) { //RƒL[FƒŠƒZƒbƒg
+	if(keycode === 82) { //Rã‚­ãƒ¼ï¼šãƒªã‚»ãƒƒãƒˆ
 		curx = 0;
 		cury = 0;
 		zoom = zoomini;
