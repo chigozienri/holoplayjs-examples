@@ -192,9 +192,9 @@ function HoloPlay(scene, camera, renderer, focalPointVector, constantCenter, hiR
 		} else if (document.body.msRequestFullscreen) {
 			document.body.msRequestFullscreen(); //IE11+
 		} else if (document.body.requestFullscreen) {
-			document.body.requestFullscreen(); // HTML5 Fullscreen APId—l
+			document.body.requestFullscreen(); // HTML5 Fullscreen APIä»•æ§˜
 		} else {
-			alert('‚²—˜—p‚Ìƒuƒ‰ƒEƒU‚Íƒtƒ‹ƒXƒNƒŠ[ƒ“‘€ì‚É‘Î‰‚µ‚Ä‚¢‚Ü‚¹‚ñ');
+			alert('ã”åˆ©ç”¨ã®ãƒ–ãƒ©ã‚¦ã‚¶ã¯ãƒ•ãƒ«ã‚¹ã‚¯ãƒªãƒ¼ãƒ³æ“ä½œã«å¯¾å¿œã—ã¦ã„ã¾ã›ã‚“');
 			return;
 		}
 		nFull=1;
@@ -209,9 +209,9 @@ function HoloPlay(scene, camera, renderer, focalPointVector, constantCenter, hiR
 		} else if (document.msExitFullscreen) {
 			document.msExitFullscreen(); //IE11+
 		} else if(document.cancelFullScreen) {
-			document.cancelFullScreen(); //Gecko:FullScreenAPId—l
+			document.cancelFullScreen(); //Gecko:FullScreenAPIä»•æ§˜
 		} else if(document.exitFullscreen) {
-			document.exitFullscreen(); // HTML5 Fullscreen APId—l
+			document.exitFullscreen(); // HTML5 Fullscreen APIä»•æ§˜
 		}
 		nFull=0;
 		document.getElementById('fullscreen').style.visibility = "visible";

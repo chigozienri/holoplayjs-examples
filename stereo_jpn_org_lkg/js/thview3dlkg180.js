@@ -282,9 +282,9 @@ function fullscreenon(){
 		} else if (document.body.msRequestFullscreen) {
 			document.body.msRequestFullscreen(); //IE11+
 		} else if (document.body.requestFullscreen) {
-			document.body.requestFullscreen(); // HTML5 Fullscreen APId—l
+			document.body.requestFullscreen(); // HTML5 Fullscreen APIä»•æ§˜
 		} else {
-			alert('‚²—˜—p‚Ìƒuƒ‰ƒEƒU‚Íƒtƒ‹ƒXƒNƒŠ[ƒ“‘€ì‚É‘Î‰‚µ‚Ä‚¢‚Ü‚¹‚ñ');
+			alert('ã”åˆ©ç”¨ã®ãƒ–ãƒ©ã‚¦ã‚¶ã¯ãƒ•ãƒ«ã‚¹ã‚¯ãƒªãƒ¼ãƒ³æ“ä½œã«å¯¾å¿œã—ã¦ã„ã¾ã›ã‚“');
 			return;
 		}
 	}
@@ -297,9 +297,9 @@ function fullscreenoff(){
 		} else if (document.msExitFullscreen) {
 			document.msExitFullscreen(); //IE11+
 		} else if(document.cancelFullScreen) {
-			document.cancelFullScreen(); //Gecko:FullScreenAPId—l
+			document.cancelFullScreen(); //Gecko:FullScreenAPIä»•æ§˜
 		} else if(document.exitFullscreen) {
-			document.exitFullscreen(); // HTML5 Fullscreen APId—l
+			document.exitFullscreen(); // HTML5 Fullscreen APIä»•æ§˜
 		}
 	}
 
@@ -340,13 +340,13 @@ function KeyDownFunc(e){
 window.focus();
 if(window.addEventListener){
 
-	// ƒL[ƒ{[ƒh‚ğ‰Ÿ‚µ‚½‚Æ‚«‚ÉÀs‚³‚ê‚éƒCƒxƒ“ƒg
+	// ã‚­ãƒ¼ãƒœãƒ¼ãƒ‰ã‚’æŠ¼ã—ãŸã¨ãã«å®Ÿè¡Œã•ã‚Œã‚‹ã‚¤ãƒ™ãƒ³ãƒˆ
 	window.addEventListener("keydown" , KeyDownFunc);
 
-// ƒAƒ^ƒbƒ`ƒCƒxƒ“ƒg‚É‘Î‰‚µ‚Ä‚¢‚é
+// ã‚¢ã‚¿ãƒƒãƒã‚¤ãƒ™ãƒ³ãƒˆã«å¯¾å¿œã—ã¦ã„ã‚‹
 }else if(document.attachEvent){
 
-	// ƒL[ƒ{[ƒh‚ğ‰Ÿ‚µ‚½‚Æ‚«‚ÉÀs‚³‚ê‚éƒCƒxƒ“ƒg
+	// ã‚­ãƒ¼ãƒœãƒ¼ãƒ‰ã‚’æŠ¼ã—ãŸã¨ãã«å®Ÿè¡Œã•ã‚Œã‚‹ã‚¤ãƒ™ãƒ³ãƒˆ
 	document.attachEvent("onkeydown" , KeyDownFunc);
 
 }
