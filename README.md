@@ -32,7 +32,7 @@ The following 4 examples come from [holoplaycore 0.0.8 examples](https://unpkg.c
 - [3D Model 2D+Depth](stereo_jpn_org_lkg/depth3d/depth3de.html) shows how to
 - [Dancing Doll](stereo_jpn_org_lkg/fbx/fbx.html) shows how to load an FBX.
 - [FBX Viewer](stereo_jpn_org_lkg/fbxviewer/fbxviewer.html) shows how to load an FBX.
-- [Half Width 2D+Depth](stereo_jpn_org_lkg/hwdepth/depthe.html) shows how to
+- [Half Width 2D+Depth](stereo_jpn_org_lkg/hwdepth/depthe.html) shows how to switch between half/full width.
 - [Horizontal Shift movies](stereo_jpn_org_lkg/ido/idoe.html) shows how to
 - [180 Horizontal Shift movies](stereo_jpn_org_lkg/ido180/ido180e.html) shows how to
 - [Panorama](stereo_jpn_org_lkg/pano/pano.html) shows how to
