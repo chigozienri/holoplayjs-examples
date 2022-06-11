@@ -23,12 +23,12 @@ The following 4 examples come from [holoplaycore 0.0.8 examples](https://unpkg.c
 
 ### The examples in stereo_jpn_org_lkg are from [http://stereo.jpn.org/lkg](http://stereo.jpn.org/lkg)
 
-- [180 2D+Depth](stereo_jpn_org_lkg/180/180e.html) shows how to
-- [360 2D+Depth](stereo_jpn_org_lkg/360/360e.html) shows how to
-- [Crystal Ball](stereo_jpn_org_lkg/ball/ball.html) shows how to
+- [180 2D+Depth](stereo_jpn_org_lkg/180/180e.html) shows how to display a VR180 image with a RGB+Depth map image.
+- [360 2D+Depth](stereo_jpn_org_lkg/360/360e.html) shows how to display a VR360 image with an equirectangular RGB+Depth map image.
+- [Crystal Ball](stereo_jpn_org_lkg/ball/ball.html) shows how to display a skybox using 6 images, and add other objects into the scene.
 - [Calibration](stereo_jpn_org_lkg/carib/index.html) shows how to access the calibration values.
 - [Human's head](stereo_jpn_org_lkg/decals/decals.html) shows how to add a decal with texture and normal map to a model dynamically (Paint splatters are added to a head model where you click on the surface).
-- [2D+Depth](stereo_jpn_org_lkg/depth/depthe.html) shows how to
+- [2D+Depth](stereo_jpn_org_lkg/depth/depthe.html) shows how to display a RGB+Depth map image.
 - [3D Model 2D+Depth](stereo_jpn_org_lkg/depth3d/depth3de.html) shows how to
 - [Dancing Doll](stereo_jpn_org_lkg/fbx/fbx.html) shows how to load an FBX.
 - [FBX Viewer](stereo_jpn_org_lkg/fbxviewer/fbxviewer.html) shows how to load an FBX.
